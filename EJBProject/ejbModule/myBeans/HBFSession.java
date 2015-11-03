@@ -15,10 +15,21 @@ import javax.ejb.Stateless;
 public class HBFSession implements HBFSessionRemote {
 
 	private HashMap<String,Float> accounts = new HashMap<String,Float>();
-    /**
+    private HashMap<String, List<String>> cards = new HashMap<String, List<String>>();
+	/**
      * Default constructor. 
      */
     public HBFSession() {
+    	List<String> card1 = new ArrayList<String>();
+    	card1.add("12345678901");
+    	card1.add("12345678902");
+    	cards.put("1111111111111111",card1);
+    	
+    	List<String> card2 = new ArrayList<String>();
+    	card2.add("12345678903");
+    	card2.add("12345678904");
+    	cards.put("2222222222222222",card2);
+    	
     	accounts.put("12345678901", 0.0F);
     	accounts.put("12345678902", 200.0F);
     	accounts.put("12345678903", 19000.32F);
@@ -27,14 +38,23 @@ public class HBFSession implements HBFSessionRemote {
     public HBFSession(HashMap<String,Float> accounts){
     	this.accounts = accounts;
     }
-    public String test(String to){
-    	String retval = "test" + to;
-    	for (int i = 0; i<accounts.size();i++){
-    		if (accounts.containsKey(to)){
-    			return retval;
+    public String test(String id){
+    	if (cards.containsKey(id)){
+    		StringBuilder stb = new StringBuilder();
+    		stb.append("ID: " + id);
+        	System.out.println(id);
+
+    		for (int i = 0; i<cards.get(id).size();i++){
+    			stb.append("\n" + cards.get(id).get(i) + ": " + accounts.get(cards.get(id).get(i)));
     		}
+    		return stb.toString();
     	}
     	return "ID missmatch";
     }
 
+    public void addMoney(String id, float money){
+    	if (accounts.containsKey(id)){
+    		accounts.replace(id, money);
+    	}
+    }
 }

@@ -17,7 +17,7 @@ public class SimpleClient {
 		Context context = new InitialContext(props);
 		HBFSessionRemote hbfRemote = (HBFSessionRemote) context.lookup("HBFSessionRemote");
 		System.out.println(hbfRemote.test("this"));
-		System.out.println(hbfRemote.test("12345678901"));
+		System.out.println(hbfRemote.test("1111111111111111"));
 	}
 
 }
