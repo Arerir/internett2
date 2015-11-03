@@ -1,6 +1,7 @@
 package myBeans;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -13,27 +14,23 @@ import javax.ejb.Stateless;
 @LocalBean
 public class HBFSession implements HBFSessionRemote {
 
-	private List<String> cardId = new ArrayList<String>();
+	private HashMap<String,Float> accounts = new HashMap<String,Float>();
     /**
      * Default constructor. 
      */
     public HBFSession() {
-    	cardId.add("12345678901");
-    	cardId.add("12345678902");
-    	cardId.add("12345678903");
-    	cardId.add("12345678904");
-    	cardId.add("12345678905");
-    	cardId.add("12345678906");
-    	cardId.add("12345678907");
-    	cardId.add("12345678908");
+    	accounts.put("12345678901", 0.0F);
+    	accounts.put("12345678902", 200.0F);
+    	accounts.put("12345678903", 19000.32F);
+    	accounts.put("12345678904", 6000000.43F);
     }
-    public HBFSession(List<String> bankNumbers){
-    	cardId = bankNumbers;
+    public HBFSession(HashMap<String,Float> accounts){
+    	this.accounts = accounts;
     }
     public String test(String to){
     	String retval = "test" + to;
-    	for (int i = 0; i<cardId.size();i++){
-    		if (cardId.get(i).equals(to)){
+    	for (int i = 0; i<accounts.size();i++){
+    		if (accounts.containsKey(to)){
     			return retval;
     		}
     	}
