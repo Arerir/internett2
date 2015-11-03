@@ -18,6 +18,11 @@ public class SimpleClient {
 		HBFSessionRemote hbfRemote = (HBFSessionRemote) context.lookup("HBFSessionRemote");
 		System.out.println(hbfRemote.test("this"));
 		System.out.println(hbfRemote.test("1111111111111111"));
+		System.out.println(hbfRemote.transfer("1111111111111111", "12345678903", "12345678901", 100.0F));
+		System.out.println(hbfRemote.test("1111111111111111"));
+		System.out.println(hbfRemote.test("2222222222222222"));
+		System.out.println(hbfRemote.pullCash("1111111111111111", 50.0F));
+		System.out.println(hbfRemote.test("1111111111111111"));
 	}
 
 }
